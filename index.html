@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AAO Motion 3D</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      color: white;
+      background: #000;
+    }
+
+    #vanta-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: slideDown 1s ease forwards;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #00f7ff, #bdd2f3);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.4rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00f7ff;
+      gap: 0.5rem;
+      text-shadow: 0 0 5px #fff;
+      animation: logoPop 1s ease-out forwards, logoGlow 3s ease-in-out infinite alternate;
+      cursor: default;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    nav {
+      display: flex;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #00f7ff;
+      transition: width 0.3s;
+    }
+
+    nav a:hover {
+      color: #00f7ff;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: #fff;
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      padding: 6rem 2rem 2rem;
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: #00f7ff;
+      animation: floatText 3s ease-in-out infinite, pulseGlow 2.5s infinite;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 100px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      color: #fff;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #00f7ff;
+    }
+
+    .services-grid, .portfolio-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .service-card, .portfolio-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      width: 260px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover, .portfolio-item:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255,255,255,0.15);
+      box-shadow: 0 0 20px #00f7ff;
+      border: 1px solid #00f7ff;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .contact-text {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .contact-icons-only {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .contact-icons-only a {
+      font-size: 3rem;
+      color: #ffffff;
+      font-weight: bold;
+      transition: transform 0.3s, color 0.3s;
+      animation: iconPulse 2s infinite;
+    }
+
+    .contact-icons-only a:hover {
+      transform: scale(1.2);
+      color: #00f7ff;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { top: -100px; opacity: 0; }
+      to { top: 0; opacity: 1; }
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; }
+      50% { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
+    }
+
+    @keyframes iconPulse {
+      0% { text-shadow: 0 0 5px #00f7ff; }
+      50% { text-shadow: 0 0 15px #00f7ff; }
+      100% { text-shadow: 0 0 5px #00f7ff; }
+    }
+
+    @keyframes logoGlow {
+      0% { box-shadow: 0 0 10px #00f7ff; }
+      100% { box-shadow: 0 0 30px #00f7ff, 0 0 50px #00f7ff; }
+    }
+
+    @keyframes logoPop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Responsive Enhancements */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 2rem; }
+      .services-grid, .portfolio-grid { flex-direction: column; align-items: center; }
+      .hamburger { display: flex; }
+      nav {
+        display: none;
+        flex-direction: column;
+        background: #000;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        width: 180px;
+        border: 1px solid #00f7ff;
+        border-radius: 10px;
+        padding: 1rem;
+      }
+      nav.active {
+        display: flex;
+      }
+      nav a {
+        margin: 0.5rem 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 1.6rem; }
+      .service-card, .portfolio-item { width: 90%; }
+      .logo { font-size: 1.1rem; padding: 0.3rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="vanta-bg"></div>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <i class="fas fa-cube"></i> AAO Motion 3D
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav id="nav-menu">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Bringing Characters to Life</h1>
+  <p>We craft high-end 3D character animations and visuals that make your ideas stand out.</p>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Us</h2>
+    <p>
+      AAO Motion 3D is a creative animation studio focused on stunning character animation and storytelling. 
+      We design expressive 3D visuals that elevate your content to cinematic levels. 
+      Whether it's for games, branding, or entertainment, we deliver impactful results.
+    </p>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>3D Character Animation</h3>
+        <p>Realistic movements and expressions for dynamic storytelling.</p>
+      </div>
+      <div class="service-card">
+        <h3>Visual Effects (VFX)</h3>
+        <p>Explosions, fire, particles, and effects that captivate the viewer.</p>
+      </div>
+      <div class="service-card">
+        <h3>Motion Graphics</h3>
+        <p>Modern, clean animations for branding, intros, and video content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section id="portfolio">
+  <div class="container">
+    <h2 class="section-title">Our Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="3d 7.png" alt="Character 1">
+        <h3>3D Infected Zone Scene</h3>
+      </div>
+      <div class="portfolio-item">
+        <img src="3d2.png" alt="Character 2">
+        <h3>Animated Sphere Mascot – Thumbs Up</h3>
+      </div>
+      <div class="portfolio-item">
+        <img src="3d 5.png" alt="Character 3">
+        <h3>3D Stylized Radio – Musical Vibes</h3>
+      </div>
+      <div class="portfolio-item">
+        <img src="3d 8.png" alt="Character 4">
+        <h3>Urban Drift – Mario in the Metaverse</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Connect With Us</h2>
+    <div class="contact-icons-only">
+      <a href="https://wa.me/2347067496610" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="mailto:abubakartajudeen2@gmail.com" target="_blank" aria-label="Gmail">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://www.tiktok.com/@eagletofficial" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  &copy; AAO Motion 3D. All rights reserved. Designed by AAO Tech Hub.
+</footer>
+
+<!-- Vanta.js Background Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
+<script>
+  VANTA.CELLS({
+    el: "#vanta-bg",
+    mouseControls: true,
+    touchControls: true,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    scale: 1.0,
+    scaleMobile: 1.0,
+    color1: 0x00f7ff,
+    color2: 0x111111,
+    size: 1.5,
+    speed: 1.2
+  });
+
+  function toggleMenu() {
+    document.getElementById("nav-menu").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>
