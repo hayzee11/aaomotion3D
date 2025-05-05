@@ -138,15 +138,15 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
       color: #fff;
+      text-align: center;
     }
 
     .section-title {
       font-size: 2.5rem;
       margin-bottom: 40px;
-      text-align: center;
       color: #00f7ff;
     }
 
@@ -179,12 +179,6 @@
       border-radius: 10px;
     }
 
-    .contact-text {
-      text-align: center;
-      font-size: 1.6rem;
-      font-weight: bold;
-    }
-
     footer {
       text-align: center;
       padding: 1rem;
@@ -213,49 +207,15 @@
       color: #00f7ff;
     }
 
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.98); }
-      to { opacity: 1; transform: scale(1); }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { top: -100px; opacity: 0; } to { top: 0; opacity: 1; } }
+    @keyframes floatText { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; } 50% { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; } }
+    @keyframes iconPulse { 0% { text-shadow: 0 0 5px #00f7ff; } 50% { text-shadow: 0 0 15px #00f7ff; } 100% { text-shadow: 0 0 5px #00f7ff; } }
+    @keyframes logoGlow { 0% { box-shadow: 0 0 10px #00f7ff; } 100% { box-shadow: 0 0 30px #00f7ff, 0 0 50px #00f7ff; } }
+    @keyframes logoPop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(40px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideDown {
-      from { top: -100px; opacity: 0; }
-      to { top: 0; opacity: 1; }
-    }
-
-    @keyframes floatText {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; }
-      50% { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
-    }
-
-    @keyframes iconPulse {
-      0% { text-shadow: 0 0 5px #00f7ff; }
-      50% { text-shadow: 0 0 15px #00f7ff; }
-      100% { text-shadow: 0 0 5px #00f7ff; }
-    }
-
-    @keyframes logoGlow {
-      0% { box-shadow: 0 0 10px #00f7ff; }
-      100% { box-shadow: 0 0 30px #00f7ff, 0 0 50px #00f7ff; }
-    }
-
-    @keyframes logoPop {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* Responsive Enhancements */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.2rem; }
       .hero p { font-size: 1rem; }
@@ -274,12 +234,8 @@
         border-radius: 10px;
         padding: 1rem;
       }
-      nav.active {
-        display: flex;
-      }
-      nav a {
-        margin: 0.5rem 0;
-      }
+      nav.active { display: flex; }
+      nav a { margin: 0.5rem 0; }
     }
 
     @media (max-width: 480px) {
@@ -290,21 +246,20 @@
       .logo { font-size: 1.1rem; padding: 0.3rem 0.6rem; }
     }
   </style>
+  </style>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+  </script>
 </head>
 <body>
-
-<div id="vanta-bg"></div>
-
-<!-- Header -->
-<header>
-  <div class="logo">
-    <i class="fas fa-cube"></i> AAO Motion 3D
-  </div>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <div id="vanta-bg"></div>
+  <header>
+    <div class="logo"><i class="fas fa-cube"></i> AAO Motion 3D</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   <nav id="nav-menu">
     <a href="#about">About</a>
     <a href="#services">Services</a>
@@ -338,15 +293,15 @@
     <div class="services-grid">
       <div class="service-card">
         <h3>3D Character Animation</h3>
-        <p>Realistic movements and expressions for dynamic storytelling.</p>
+        <p>From rigging to expressive motion, we specialize in realistic and stylized character animation.</p>
       </div>
       <div class="service-card">
         <h3>Visual Effects (VFX)</h3>
-        <p>Explosions, fire, particles, and effects that captivate the viewer.</p>
+        <p>We bring your scenes to life with high-quality visual effects for film, ads, and games.</p>
       </div>
       <div class="service-card">
-        <h3>Motion Graphics</h3>
-        <p>Modern, clean animations for branding, intros, and video content.</p>
+        <h3>3D Modeling</h3>
+        <p>We design detailed and optimized models for games, animation, and virtual production.</p>
       </div>
     </div>
   </div>
@@ -355,23 +310,33 @@
 <!-- Portfolio -->
 <section id="portfolio">
   <div class="container">
-    <h2 class="section-title">Our Portfolio</h2>
+    <h2 class="section-title">Our Work</h2>
     <div class="portfolio-grid">
       <div class="portfolio-item">
-        <img src="3d 7.png" alt="Character 1">
-        <h3>3D Infected Zone Scene</h3>
+        <img src="3d 6.png" alt="Project 1">
+        <p>3D Infected Zone Scene</p>
       </div>
       <div class="portfolio-item">
-        <img src="3d2.png" alt="Character 2">
-        <h3>Animated Sphere Mascot – Thumbs Up</h3>
+        <img src="3d 5.png" alt="Project 2">
+        <p>3D Stylized Radio – Musical Vibes</p>
       </div>
       <div class="portfolio-item">
-        <img src="3d 5.png" alt="Character 3">
-        <h3>3D Stylized Radio – Musical Vibes</h3>
+        <img src="3d 4.png" alt="Project 2">
+        <p>Coca cola – Main View</p>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="pefume bottle.png" alt="Project 2">
+        <p>Perfume</p>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="3d 8.png" alt="Project 2">
+        <p>Urban Drift – Mario in the Metaverse</p>
       </div>
       <div class="portfolio-item">
-        <img src="3d 8.png" alt="Character 4">
-        <h3>Urban Drift – Mario in the Metaverse</h3>
+        <img src="3d2.png" alt="Animated Sphere Mascot – Thumbs Up">
+        <p>Animated Sphere Mascot – Thumbs Up</p>
       </div>
     </div>
   </div>
@@ -380,46 +345,37 @@
 <!-- Contact -->
 <section id="contact">
   <div class="container">
-    <h2 class="section-title">Connect With Us</h2>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="contact-text">Connect with us on social media</p>
     <div class="contact-icons-only">
-      <a href="https://wa.me/2347067496610" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="mailto:abubakartajudeen2@gmail.com" target="_blank" aria-label="Gmail">
+      <!-- Gmail -->
+      <a href="mailto:Abubakartajudeen2@gmail.com" target="_blank">
         <i class="fas fa-envelope"></i>
       </a>
-      <a href="https://www.tiktok.com/@eagletofficial" target="_blank" aria-label="TikTok">
+    
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@eagletofficial" target="_blank">
         <i class="fab fa-tiktok"></i>
       </a>
+    
+      <!-- WhatsApp -->
+      <a href="https://wa.me/2347067496610" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+      </a>
     </div>
+    
   </div>
 </section>
 
 <!-- Footer -->
 <footer>
-  &copy; AAO Motion 3D. All rights reserved. Designed by AAO Tech Hub.
+  &copy; 2025 AAO Motion 3D. All rights reserved.
 </footer>
 
-<!-- Vanta.js Background Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
 <script>
-  VANTA.CELLS({
-    el: "#vanta-bg",
-    mouseControls: true,
-    touchControls: true,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    color1: 0x00f7ff,
-    color2: 0x111111,
-    size: 1.5,
-    speed: 1.2
-  });
-
   function toggleMenu() {
-    document.getElementById("nav-menu").classList.toggle("active");
+    const nav = document.getElementById('nav-menu');
+    nav.classList.toggle('active');
   }
 </script>
 
